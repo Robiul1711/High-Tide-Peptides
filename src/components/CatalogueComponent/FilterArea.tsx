@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { X } from "lucide-react";
+import { IoFilterSharp } from "react-icons/io5";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 
@@ -68,7 +68,7 @@ const FilterArea = () => {
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <X className="h-5 w-5 text-gray-700" strokeWidth={3} />
+         <IoFilterSharp />
           <h2 className="text-lg font-semibold text-gray-800">Filters</h2>
         </div>
         <button

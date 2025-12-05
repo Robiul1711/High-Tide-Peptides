@@ -48,12 +48,12 @@ const Catalogue = () => {
           {/* Background Blur Overlay */}
           <div
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity py"
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity"
           ></div>
 
           {/* Slide-in Filter Panel */}
           <div
-            className={`fixed top-0 left-0 h-full w-4/5 sm:w-[400px] bg-white shadow-xl z-50 p-6 mt-18 sm:mt-22 transform transition-transform duration-300 ease-in-out ${
+            className={`fixed top-0 left-0 h-full w-4/5 sm:w-[400px] bg-white shadow-xl z-50 p-6 mt-16 sm:mt-20 transform transition-transform duration-300 ease-in-out ${
               isOpen ? "translate-x-0" : "translate-x-full"
             }`}
           >

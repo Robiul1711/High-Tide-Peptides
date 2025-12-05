@@ -10,7 +10,7 @@ type UseClientProps = {
   enabled?: boolean;
 };
 
-const useClient = <T = any,>({
+const useClient = ({
   queryKey,
   url,
   isPrivate = false,
@@ -19,7 +19,7 @@ const useClient = <T = any,>({
 }: UseClientProps) => {
   const client = isPrivate ? useAxiosSecure() : useAxiosPublic();
 
-  const { data, isLoading, isError, error, refetch } = useQuery<T>({
+  const { data, isLoading, isError, error, refetch } = useQuery({
     queryKey: [...queryKey, params],
     queryFn: async () => {
       const res = await client.get(url, { params });
