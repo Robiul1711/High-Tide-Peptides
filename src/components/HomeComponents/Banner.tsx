@@ -4,7 +4,31 @@ import banner from "../../assets/images/banner.png";
 import CommonButton from "../common/CommonButton";
 import Title from "../common/Title";
 
-const Banner = () => {
+
+interface BannerProps {
+  bannerData: {
+    id: number;
+    title: string;
+    image: string;
+    description: string;
+    section_in_page: string;
+    page: string;
+    cms_image_url: string;
+    status: number;
+  },
+  titleData: {
+    id: number;
+    title: string;
+    image: string;
+    description: string;
+    section_in_page: string;
+    page: string;
+    cms_image_url: string;
+    status: number;
+  }
+}
+const Banner = ({bannerData, titleData }: BannerProps) => {
+  console.log(titleData, bannerData)
   const title1Ref = useRef(null);
   const title2Ref = useRef(null);
   const subtitleRef = useRef(null);
@@ -52,31 +76,33 @@ const Banner = () => {
   }, []);
 
   return (
-    <div className="section-padding-y">
-      <div className="font-playfair text-center px-4">
+    <div className="section-padding-y ">
+      <div className="font-playfair text-center px-4 ">
         <Title level="title64" ref={title1Ref}>
-          Peptides Crafted to the Highest
+          <span dangerouslySetInnerHTML={{__html:titleData?.title}}></span>
+         {}
         </Title>
 
-        <Title
+        {/* <Title
           level="title64"
           className="text-Primary"
           ref={title2Ref}
         >
           GMP Standards
-        </Title>
+        </Title> */}
 
         <Title
           level="title18"
           className="text-Secondary font-poppins max-w-3xl mx-auto"
           ref={subtitleRef}
         >
-          Produced in GMP-certified facilities for pure, consistent quality—no
-          fillers, no buffers, just clean, raw peptides.
+{titleData?.description}
         </Title>
 
         <CommonButton
-          className="mx-auto mt-6 bg-Primary text-white font-poppins"
+          to="/catalogue"
+          as="link"
+          className="mx-auto mt-6 bg-Primary inline-flex items-center gap-2 text-white font-poppins"
           ref={buttonRef}
         >
           Shop Now
