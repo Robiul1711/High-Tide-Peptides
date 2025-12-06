@@ -1,5 +1,7 @@
 
-import React, { useState, useEffect, useRef, ReactNode } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import type { ReactNode } from "react";
+
 
 const ChevronDown = (props: React.SVGProps<SVGSVGElement>) => (
   <svg

@@ -1,15 +1,26 @@
-import legalDisclaimer from "@/assets/images/LegalDisclaimer.png";
+import useClient from "../../hooks/useClient";
 import CommonButton from "../common/CommonButton";
 import Title from "../common/Title";
 
 const LegalDisclaimer = () => {
+    const { data } = useClient({
+    queryKey: ["all-cms"],
+    url: "/webpages/cms/get-all",
+    isPrivate: false,
+  });
+
+  const cms = data?.data || [];
+    const disclaimerData = cms.find(
+    (item: any) => item.section_in_page === "newsletter"
+  );
+  // console.log(disclaimerData)
   return (
     <div className="section-padding-x section-padding-y w-full flex flex-col lg:flex-row items-center gap-10">
 
       {/* Image */}
       <div className="w-full lg:w-1/2 flex justify-center">
         <img
-          src={legalDisclaimer}
+          src={disclaimerData?.cms_image_url}
           alt="Legal Disclaimer"
           className="w-full max-w-md object-contain"
         />
@@ -19,19 +30,14 @@ const LegalDisclaimer = () => {
       <div className="w-full lg:w-1/2 space-y-6">
         <div className="font-playfair">
           <Title level="title48" className="leading-snug">
-            Legal Disclaimer
+           {disclaimerData?.title}
           </Title>
 
           <Title
             level="title18"
             className="text-Secondary font-poppins mt-4 leading-relaxed"
           >
-            For research use only. Not intended for human or veterinary
-            consumption, medical treatment, or diagnostic use. Buyer must be
-            21+ and is solely responsible for proper handling and compliance
-            with all applicable laws. By ordering, you confirm you are a
-            qualified researcher and accept all risks. High Tide Peptides
-            assumes no liability for misuse.
+           {disclaimerData?.description}
           </Title>
         </div>
 

@@ -2,7 +2,7 @@ import React from "react";
 import { IoIosNotifications } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 interface CommonNavbarProps {
   open: boolean;
@@ -10,7 +10,7 @@ interface CommonNavbarProps {
 }
 
 const CommonNavbar: React.FC<CommonNavbarProps> = ({ open, setOpen }) => {
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
   return (
     <div className="flex items-center justify-between w-full py-3 md:py-6 px-0 rounded-2xl">

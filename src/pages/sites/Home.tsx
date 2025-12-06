@@ -15,16 +15,14 @@ const Home = () => {
   const bannerData = cms.find((item: any) => item.section_in_page === "banner");
   const heroData = cms.find((item: any) => item.section_in_page === "hero");
   const titleData = cms.find((item: any) => item.section_in_page === "title");
-  const disclaimerData = cms.find(
-    (item: any) => item.section_in_page === "newsletter"
-  );
+
 
   return (
     <>
       <Banner bannerData={bannerData} titleData={titleData} />
       <Research heroData={heroData} />
-      <FeaturedMedicines titleData={titleData} />
-      <LegalDisclaimer disclaimerData={disclaimerData} />
+      <FeaturedMedicines />
+      <LegalDisclaimer  />
     </>
   );
 };

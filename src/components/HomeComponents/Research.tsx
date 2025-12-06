@@ -1,4 +1,3 @@
-import researchSection from "../../assets/images/researchSection.png"
 import Title from "../common/Title"
 
 interface ResearchProps {
