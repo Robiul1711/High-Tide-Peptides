@@ -22,22 +22,20 @@ const FilterArea = () => {
   ];
 
 
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [priceRange, setPriceRange] = useState([0, 20000]);
-  const [instantDeliveryOnly, setInstantDeliveryOnly] = useState(false);
-  const [selectedRating, setSelectedRating] = useState(null);
+const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+const [priceRange, setPriceRange] = useState<[number, number]>([0, 20000]);
+const [instantDeliveryOnly, setInstantDeliveryOnly] = useState<boolean>(false);
+const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
-  const handleCategoryToggle = (category) => {
-    setSelectedCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category]
-    );
-  };
 
-  const handleRatingToggle = (ratingId) => {
-    setSelectedRating(selectedRating === ratingId ? null : ratingId);
-  };
+const handleCategoryToggle = (category: string) => {
+  setSelectedCategories((prev) =>
+    prev.includes(category)
+      ? prev.filter((c) => c !== category)
+      : [...prev, category]
+  );
+};
+
 
   const handleClear = () => {
     setSelectedCategories([]);
@@ -59,9 +57,11 @@ const FilterArea = () => {
     console.log("Applied Filters:", filterData);
   };
 
-  const handlePriceChange = (value) => {
-    setPriceRange(value);
-  };
+const handlePriceChange = (value: number | number[]) => {
+  if (Array.isArray(value)) {
+    setPriceRange([value[0], value[1]]);
+  }
+};
 
   return (
     <div className="w-full max-w-sm bg-white md:rounded-2xl md:p-6 md:shadow-sm">

@@ -72,7 +72,7 @@ const Catalogue = () => {
       )}
 
       <div>
-         <LegalDisclaimer />
+        <LegalDisclaimer />
       </div>
     </section>
   );

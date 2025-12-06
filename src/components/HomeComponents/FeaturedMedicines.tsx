@@ -1,4 +1,4 @@
-import { medicineData } from "../../dummyData/medicineData";
+// import { medicineData } from "../../dummyData/medicineData";
 import CommonButton from "../common/CommonButton";
 import MedicineCard from "../common/MedicineCard";
 import Title from "../common/Title";
@@ -6,6 +6,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 
 
 const FeaturedMedicines = () => {
+
   return (
     <div className="section-padding-x">
       <div className="flex flex-col lg:flex-row justify-between items-end">
@@ -26,16 +27,12 @@ const FeaturedMedicines = () => {
          View all <FaArrowRightLong />
         </CommonButton>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-      {medicineData.map((item) => (
-        <MedicineCard
-          key={item.id}
-          image={item.image}
-          title={item.title}
-          price={item.price}
-          oldPrice={item.oldPrice}
-        />
-      ))}
+      <div className=" mt-12">
+
+  <MedicineCard
+  />
+
+
     </div>
     </div>
   );

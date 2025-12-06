@@ -2,23 +2,35 @@ import CommonButton from "./CommonButton";
 import Title from "./Title";
 import { CartSVG } from "../svg/HomeSVG";
 import { Link } from "react-router-dom";
+import useClient from "../../hooks/useClient";
 
-interface MedicineCardProps {
-  image: string;
-  title: string;
-  price: number;
-  oldPrice: number;
-}
 
-const MedicineCard = ({ image, title, price, oldPrice }: MedicineCardProps) => {
+const MedicineCard = () => {
+      const { data } = useClient({
+    queryKey: ["all-products"],
+    url: "/products/get-all",
+    isPrivate: false,
+  });
+console.log(data?.data)
   return (
-    <Link to={`/product/${title}`} className="p-4 border shadow rounded-2xl">
-      <img src={image} alt={title} className="w-full object-cover rounded-lg" />
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {
+        data?.data?.map((item : any,index: number)=>(
+
+    <Link to={`/product/${item?.product_uid}`} key={index} className="p-4 border shadow rounded-2xl">
+    <div className="w-full h-48 sm:h-56 md:h-72 lg:h-80 overflow-hidden rounded-lg">
+  <img
+    src={item?.product_image_url}
+    alt={item?.title}
+    className="w-full h-full object-cover"
+  />
+</div>
+
 
       <div className="flex justify-between items-center mt-4">
         <div>
           <Title level="title18" className="font-playfair">
-            {title}
+            {item?.title}
           </Title>
 
           <div className="flex items-center gap-10">
@@ -26,14 +38,14 @@ const MedicineCard = ({ image, title, price, oldPrice }: MedicineCardProps) => {
               level="title18"
               className="font-playfair text-[#4E97FD]"
             >
-              ${price.toFixed(2)}
+              ${item?.final_price?.toFixed(2)}
             </Title>
 
             <Title
               level="title18"
               className="font-playfair line-through text-gray-400"
             >
-              ${oldPrice.toFixed(2)}
+              ${item?.start_price?.toFixed(2)}
             </Title>
           </div>
         </div>
@@ -43,6 +55,10 @@ const MedicineCard = ({ image, title, price, oldPrice }: MedicineCardProps) => {
         </CommonButton>
       </div>
     </Link>
+        ))
+      }
+
+    </div>
   );
 };
 
