@@ -1,11 +1,37 @@
-import React from "react";
+import  { useState } from "react";
 import FilterArea from "../../components/CatalogueComponent/FilterArea";
 import MedicineCard from "../../components/common/MedicineCard";
-import { medicineData } from "../../dummyData/medicineData";
 import LegalDisclaimer from "../../components/HomeComponents/LegalDisclaimer";
 
 const Catalogue = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [filterParams, setFilterParams] = useState({
+    stock: null,
+    low: 0,
+    high: 500,
+    sort: null,
+  });
+  const [applyFilters, setApplyFilters] = useState(false);
+
+  const handleFilterChange = (newParams: any) => {
+    setFilterParams(newParams);
+    setApplyFilters(true);
+    
+    // Close mobile drawer if open
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleClearFilters = () => {
+    setFilterParams({
+      stock: null,
+      low: 0,
+      high: 500,
+      sort: null,
+    });
+    setApplyFilters(false);
+  };
 
   return (
     <section className="section-padding-y relative">
@@ -23,22 +49,19 @@ const Catalogue = () => {
       <div className="section-padding-x flex w-full gap-6 lg:gap-10 ">
         {/* Sidebar (Desktop View) */}
         <div className="hidden md:block md:w-[20%]">
-          <FilterArea />
+          <FilterArea 
+            onFilterChange={handleFilterChange}
+            onClearFilters={handleClearFilters}
+          />
         </div>
 
         {/* Products Area */}
         <div className="w-full md:w-[80%]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {medicineData.map((item) => (
-              <MedicineCard
-                key={item.id}
-                image={item.image}
-                title={item.title}
-                price={item.price}
-                oldPrice={item.oldPrice}
-              />
-            ))}
-          </div>
+          <MedicineCard 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            filterParams={filterParams}
+            applyFilters={applyFilters}
+          />
         </div>
       </div>
 
@@ -53,9 +76,7 @@ const Catalogue = () => {
 
           {/* Slide-in Filter Panel */}
           <div
-            className={`fixed top-0 left-0 h-full w-4/5 sm:w-[400px] bg-white shadow-xl z-50 p-6 mt-16 sm:mt-20 transform transition-transform duration-300 ease-in-out ${
-              isOpen ? "translate-x-0" : "translate-x-full"
-            }`}
+            className={`fixed top-0 left-0 h-full w-4/5 sm:w-[400px] bg-white shadow-xl z-50 p-6 mt-16 sm:mt-20 transform transition-transform duration-300 ease-in-out translate-x-0`}
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-semibold text-gray-800">Filter</h2>
@@ -66,7 +87,10 @@ const Catalogue = () => {
                 ✕
               </button>
             </div>
-            <FilterArea />
+            <FilterArea 
+              onFilterChange={handleFilterChange}
+              onClearFilters={handleClearFilters}
+            />
           </div>
         </>
       )}

@@ -4,9 +4,7 @@ import MedicineCard from "../common/MedicineCard";
 import Title from "../common/Title";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-
 const FeaturedMedicines = () => {
-
   return (
     <div className="section-padding-x">
       <div className="flex flex-col lg:flex-row justify-between items-end">
@@ -23,17 +21,13 @@ const FeaturedMedicines = () => {
             confidence.
           </Title>
         </div>
-        <CommonButton className=" bg-Primary text-white font-poppins flex items-center gap-2">
-         View all <FaArrowRightLong />
+        <CommonButton as="link" to="/catalogue" className=" bg-Primary text-white font-poppins flex items-center gap-2">
+          View all <FaArrowRightLong />
         </CommonButton>
       </div>
       <div className=" mt-12">
-
-  <MedicineCard
-  />
-
-
-    </div>
+        <MedicineCard className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"/>
+      </div>
     </div>
   );
 };
