@@ -103,7 +103,7 @@ const Banner = ({bannerData, titleData }: BannerProps) => {
           to="/catalogue"
           as="link"
           className="mx-auto mt-6 bg-Primary inline-flex items-center gap-2 text-white font-poppins"
-          ref={buttonRef}
+          // ref={buttonRef}
         >
           Shop Now
         </CommonButton>

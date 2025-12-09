@@ -32,30 +32,7 @@ export default function CartPage() {
       quantity: 3,
       image: peptide,
     },
-    {
-      id: "4",
-      title: "Peptides Crafted",
-      subtitle: "BPC-157 20mg",
-      price: 20,
-      quantity: 3,
-      image: peptide,
-    },
-    {
-      id: "5",
-      title: "Peptides Crafted",
-      subtitle: "BPC-157 20mg",
-      price: 20,
-      quantity: 3,
-      image: peptide,
-    },
-    {
-      id: "6",
-      title: "Peptides Crafted",
-      subtitle: "BPC-157 20mg",
-      price: 20,
-      quantity: 3,
-      image: peptide,
-    },
+
   ]);
 
   const increase = (id: string) =>

@@ -29,6 +29,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.67.0",
+    "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
     "react-medium-image-zoom": "^5.4.0",
     "react-router-dom": "^7.9.6",
