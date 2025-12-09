@@ -4,18 +4,18 @@ import Title from "../../components/common/Title";
 import { CartSVG } from "../../components/svg/HomeSVG";
 import { Link, useParams } from "react-router-dom";
 import useClient from "../../hooks/useClient";
-import Zoom from 'react-medium-image-zoom'
-import 'react-medium-image-zoom/dist/styles.css'
+import Zoom from "react-medium-image-zoom";
+import "react-medium-image-zoom/dist/styles.css";
 export default function ProductDetails() {
   const { id } = useParams();
-  const [qty, setQty] = useState(3);
+  const [qty, setQty] = useState(1);
 
-const { data } = useClient({
-  queryKey: ["product-details", id ?? ""], // FIXED
-  url: `/products/product/${id ?? ""}`,
-  isPrivate: false,
-  enabled: !!id, // Do not run until id exists
-});
+  const { data } = useClient({
+    queryKey: ["product-details", id ?? ""], // FIXED
+    url: `/products/product/${id ?? ""}`,
+    isPrivate: false,
+    enabled: !!id, // Do not run until id exists
+  });
 
   return (
     <section>
@@ -24,12 +24,11 @@ const { data } = useClient({
           {/* Left — Product Image */}
           <div>
             <Zoom>
-
-            <img
-              src={data?.data?.product_image_url}
-              alt="Peptides Crafted"
-              className="w-full h-[350px] md:h-[450px] lg:h-[500px] object-cover rounded-xl shadow-md"
-            />
+              <img
+                src={data?.data?.product_image_url}
+                alt="Peptides Crafted"
+                className="w-full h-[350px] md:h-[450px] lg:h-[500px] object-cover rounded-xl shadow-md"
+              />
             </Zoom>
           </div>
 
@@ -83,7 +82,7 @@ const { data } = useClient({
               </button>
 
               <Link
-                to="/checkout"
+                to="/cart"
                 className="px-6 py-3 border border-[#0E9FBA] text-[#0E9FBA] rounded-lg font-medium hover:bg-[#0E9FBA] hover:text-white transition"
               >
                 Buy Now

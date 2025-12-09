@@ -16,32 +16,32 @@ import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
 
 const router = createBrowserRouter([
       // Auth
-  {
-    path: "/auth",
-    element: <AuthLayout />,
-    children: [
-      {
-        path: "sign-in",
-        element: <SignIn />,
-      },
-      {
-        path: "sign-up",
-        element: <SignUp />,
-      },
-      {
-        path: "forget-password",
-        element: <ForgetPassword />,
-      },
-      {
-        path: "verify-otp",
-        element: <VerifyOtp />,
-      },
-      {
-        path: "new-password-set",
-        element: <NewPasswordSet />,
-      },
-    ],
-  },  
+  // {
+  //   path: "/auth",
+  //   element: <AuthLayout />,
+  //   children: [
+  //     {
+  //       path: "sign-in",
+  //       element: <SignIn />,
+  //     },
+  //     {
+  //       path: "sign-up",
+  //       element: <SignUp />,
+  //     },
+  //     {
+  //       path: "forget-password",
+  //       element: <ForgetPassword />,
+  //     },
+  //     {
+  //       path: "verify-otp",
+  //       element: <VerifyOtp />,
+  //     },
+  //     {
+  //       path: "new-password-set",
+  //       element: <NewPasswordSet />,
+  //     },
+  //   ],
+  // },  
   {
     path: "/",
     element: <Layout />, // Public layout

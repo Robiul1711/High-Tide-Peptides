@@ -58,7 +58,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* Payment Section */}
-             <Title level="title32" className="font-playfair py-3 lg:py-5">Payment Method</Title>
+             {/* <Title level="title32" className="font-playfair py-3 lg:py-5">Payment Method</Title>
 
           <div
             className="flex items-center gap-3 border rounded-lg p-3 cursor-pointer w-fit"
@@ -73,7 +73,7 @@ export default function CheckoutPage() {
             <FiCreditCard className="text-gray-400 text-lg" />
           </div>
 
-          {/* Card number */}
+    
           <div className="mt-6">
             <label className="text-sm font-medium">Card number</label>
             <input
@@ -82,7 +82,6 @@ export default function CheckoutPage() {
             />
           </div>
 
-          {/* Expiration + CVV */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-6">
             <div>
               <label className="text-sm font-medium">Expiration</label>
@@ -107,7 +106,6 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          {/* Terms */}
           <p className="text-center text-sm text-gray-500 mt-6">
             By clicking the button, you agree to the{" "}
             <span className="text-[#0E9FBA] cursor-pointer">
@@ -115,10 +113,10 @@ export default function CheckoutPage() {
             </span>
           </p>
 
-          {/* Button */}
+      
           <button className="w-full bg-[#0E9FBA] text-white py-4 rounded-lg mt-6 text-center font-medium">
             Place Order Now
-          </button>
+          </button> */}
         </div>
 
         {/* Right side summary */}
@@ -141,7 +139,11 @@ export default function CheckoutPage() {
             <p>Grand Total</p>
             <p>${total.toFixed(2)}</p>
           </div>
+       <button className="w-full bg-[#0E9FBA] text-white py-4 rounded-lg mt-6 text-center font-medium">
+           Confirm Order
+          </button> 
         </div>
+
       </div>
     </div>
   <LegalDisclaimer />

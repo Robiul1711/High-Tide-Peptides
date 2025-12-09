@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form";
 import Title from "../common/Title";
+import useMutationClient from "../../hooks/useMutationClient";
 
 interface ContactFormTypes {
   name: string;
@@ -18,9 +19,21 @@ export default function ContactUs() {
     reset,
   } = useForm<ContactFormTypes>();
 
-  const onSubmit = (data: ContactFormTypes) => {
-    console.log("Contact Form Submitted:", data);
-    reset();
+  // POST /forms/contact/store
+  const ContactPost = useMutationClient({
+    url: "/forms/contact/store",
+    method: "post",
+    isPrivate: false,
+    successMessage: "Message sent successfully!",
+  });
+
+  const onSubmit = async (data: ContactFormTypes) => {
+    try {
+      await ContactPost.mutateAsync({ data });
+      reset();
+    } catch (error) {
+      console.error("Submission error:", error);
+    }
   };
 
   return (
@@ -30,19 +43,13 @@ export default function ContactUs() {
         Contact Us
       </Title>
 
-      {/* Short Description */}
-      <p className="text-sm sm:text-base  lg:text-lg text-center text-gray-500 mb-10 leading-relaxed max-w-2xl mx-auto">
+      <p className="text-sm sm:text-base lg:text-lg text-center text-gray-500 mb-10 max-w-2xl mx-auto">
         Lorem ipsum dolor sit amet consectetur. Nunc ipsum tincidunt dictum
-        donec dui in cursus risus. Nunc lacus egestas ipsum dictumst volutpat
-        sed sed diam tincidunt. Amet adipiscing molestie amet cum varius egestas
-        sem tellus.
+        donec dui in cursus risus.
       </p>
 
       {/* FORM */}
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-6"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* NAME */}
         <div>
           <label className="text-sm font-medium">
@@ -115,9 +122,12 @@ export default function ContactUs() {
         {/* BUTTON */}
         <button
           type="submit"
-          className="w-full bg-Primary text-white py-3 rounded-xl font-medium hover:bg-cyan-700 transition-all"
+          disabled={ContactPost.isPending}
+          className={`w-full bg-Primary text-white py-3 rounded-xl font-medium transition-all ${
+            ContactPost.isPending ? "opacity-70 cursor-not-allowed" : "hover:bg-cyan-700"
+          }`}
         >
-          Submit
+          {ContactPost.isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import type { AxiosRequestConfig } from "axios";
-
 import useAxiosPublic from "./useAxiosPublic";
 import useAxiosSecure from "./useAxiosSecure";
 
@@ -35,18 +34,19 @@ const useMutationClient = <T = any, V = any>({
   const client = isPrivate ? useAxiosSecure() : useAxiosPublic();
 
   return useMutation<T, any, Payload<V>>({
-    mutationFn: async ({ data, config }) =>
-      method === "delete"
-        ? (await client.delete(url, config)).data
-        : (await client[method](url, data, config)).data,
+    mutationFn: async ({ data, config }) => {
+      if (method === "delete") {
+        return (await client.delete(url, config)).data;
+      }
+      return (await client[method](url, data, config)).data;
+    },
 
     onSuccess: (data) => {
       toast.success((data as any)?.message || successMessage);
 
-      // ✅ Wrap key array in { queryKey: key }
-      invalidateKeys.forEach((key) =>
-        queryClient.invalidateQueries({ queryKey: key })
-      );
+      invalidateKeys.forEach((key) => {
+        queryClient.invalidateQueries({ queryKey: key });
+      });
 
       onSuccess?.(data);
     },
@@ -59,14 +59,3 @@ const useMutationClient = <T = any, V = any>({
 };
 
 export default useMutationClient;
-{
-  /* const deleteUser = useMutationClient({
-  url: `/users/${id}`,
-  method: "delete",
-  isPrivate: true,
-  invalidateKeys: [["users"]], // array of query keys
-  successMessage: "User deleted!",
-});
-
-deleteUser.mutate({}); */
-}
