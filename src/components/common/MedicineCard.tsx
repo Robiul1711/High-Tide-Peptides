@@ -3,6 +3,8 @@ import Title from "./Title";
 import { CartSVG } from "../svg/HomeSVG";
 import { Link } from "react-router-dom";
 import useClient from "../../hooks/useClient";
+import { useCart } from "../../context/CartContext";
+import PageLoader from "./PageLoader";
 
 interface MedicineCardProps {
   className?: string;
@@ -10,12 +12,12 @@ interface MedicineCardProps {
   applyFilters?: boolean;
 }
 
-const MedicineCard = ({ 
-  className, 
-  filterParams = {}, 
-  applyFilters = false 
+const MedicineCard = ({
+  className,
+  filterParams = {},
+  applyFilters = false,
 }: MedicineCardProps) => {
-  
+  const { addToCart } = useCart();
   // Conditionally fetch based on whether filters are applied
   const { data, isLoading, isError } = useClient({
     queryKey: ["products", filterParams],
@@ -28,9 +30,7 @@ const MedicineCard = ({
 
   if (isLoading) {
     return (
-      <div className={`${className} flex justify-center items-center`}>
-        <div className="text-Primary">Loading products...</div>
-      </div>
+     <PageLoader />
     );
   }
 
@@ -58,13 +58,13 @@ const MedicineCard = ({
     <div className={`${className}`}>
       {data.data.map((item: any, index: number) => {
         const isOutOfStock = item?.stock === 0;
-        
+
         return (
           <Link
             to={`/product/${item?.id}`}
             key={index}
             className={`p-4 border shadow rounded-2xl hover:shadow-lg transition-shadow duration-300 ${
-              isOutOfStock ? 'opacity-80' : ''
+              isOutOfStock ? "opacity-80" : ""
             }`}
           >
             <div className="w-full h-48 sm:h-56 md:h-72 lg:h-80 overflow-hidden rounded-lg">
@@ -73,7 +73,8 @@ const MedicineCard = ({
                 alt={item?.title}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 onError={(e) => {
-                  e.currentTarget.src = "https://via.placeholder.com/300x400?text=No+Image";
+                  e.currentTarget.src =
+                    "https://via.placeholder.com/300x400?text=No+Image";
                 }}
               />
             </div>
@@ -85,7 +86,10 @@ const MedicineCard = ({
                 </Title>
 
                 <div className="flex items-center gap-4 mt-2">
-                  <Title level="title18" className="font-playfair text-[#4E97FD]">
+                  <Title
+                    level="title18"
+                    className="font-playfair text-[#4E97FD]"
+                  >
                     ${item?.final_price?.toFixed(2)}
                   </Title>
 
@@ -98,15 +102,17 @@ const MedicineCard = ({
                     </Title>
                   )}
                 </div>
-                
+
                 {/* Stock Status */}
                 <div className="mt-2">
-                  <span className={`text-sm px-2 py-1 rounded ${
-                    isOutOfStock 
-                      ? 'bg-red-100 text-red-800' 
-                      : 'bg-green-100 text-green-800'
-                  }`}>
-                    {isOutOfStock ? 'Out of Stock' : 'In Stock'}
+                  <span
+                    className={`text-sm px-2 py-1 rounded ${
+                      isOutOfStock
+                        ? "bg-red-100 text-red-800"
+                        : "bg-green-100 text-green-800"
+                    }`}
+                  >
+                    {isOutOfStock ? "Out of Stock" : "In Stock"}
                     {!isOutOfStock && item?.stock > 0 && ` (${item?.stock})`}
                   </span>
                 </div>
@@ -114,12 +120,18 @@ const MedicineCard = ({
 
               {/* Show cart button only if NOT out of stock */}
               {!isOutOfStock && (
-                <CommonButton 
-                  className="bg-Primary hover:bg-teal-600 text-white font-poppins p-3 rounded-lg transition-colors duration-200"
+                <CommonButton
+                  className="bg-Primary hover:bg-teal-600 text-white font-poppins p-3 rounded-lg"
                   onClick={(e) => {
-                    e.preventDefault();
-                    // Add to cart logic here
-                    console.log("Add to cart:", item.id);
+                    e.preventDefault(); // stops <Link> navigation
+                    e.stopPropagation(); // stops bubbling
+                    addToCart({
+                      id: item.id,
+                      title: item.title,
+                      price: item.final_price,
+                      image: item.product_image_url,
+                     
+                    });
                   }}
                 >
                   <CartSVG className="text-white w-5 h-5" />
