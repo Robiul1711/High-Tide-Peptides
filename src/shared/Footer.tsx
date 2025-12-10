@@ -35,7 +35,7 @@ const Footer = () => {
 
           {/* LEFT COPYRIGHT */}
           <p className="text-center md:text-left text-sm">
-            © 2025 CardVault. All rights reserved. Designed with ❤️ for collectors
+            © 2025 CardVault. All rights reserved.
           </p>
 
           {/* RIGHT POLICY LINKS */}

@@ -2,17 +2,14 @@ import { createBrowserRouter } from "react-router-dom";
 import Home from "../pages/sites/Home";
 import Layout from "../layout/Layout";
 import AdminLayout from "../layout/AdminLayout";
-import AuthLayout from "../layout/AuthLayout";
-import SignIn from "../pages/AuthPages/SignIn";
-import SignUp from "../pages/AuthPages/SignUp";
-import ForgetPassword from "../pages/AuthPages/ForgetPassword";
-import VerifyOtp from "../pages/AuthPages/VerifyOtp";
-import NewPasswordSet from "../pages/AuthPages/NewPasswordSet";
 import Catalogue from "../pages/CataloguePage/Catalogue";
 import Contact from "../pages/ContactPage/Contact";
 import CartPage from "../pages/ShoopingCartPage/CartPage";
 import ProductDetails from "../pages/ProductDetailPage/ProductDetails";
 import CheckoutPage from "../pages/CheckoutPage/CheckoutPage";
+import TermsOfService from "../pages/TermsofService/TermsOfService";
+import PrivacyPolicy from "../pages/PrivacyPolicy/PrivacyPolicy";
+import Sitemap from "../pages/Sitemap/Sitemap";
 
 const router = createBrowserRouter([
       // Auth
@@ -52,6 +49,9 @@ const router = createBrowserRouter([
       { path: "/cart", element: <CartPage /> },
       { path: "/product/:id", element: <ProductDetails /> },
       { path: "/checkout", element: <CheckoutPage /> },
+      { path: "/terms-of-service", element: <TermsOfService /> },
+      { path: "/privacy-policy", element: <PrivacyPolicy /> },
+      { path: "/sitemap", element: <Sitemap /> },
 
       // Add more public pages here
     ],

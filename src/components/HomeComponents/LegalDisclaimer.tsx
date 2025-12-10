@@ -46,7 +46,7 @@ const LegalDisclaimer = () => {
     <div className="section-padding-x section-padding-y w-full flex flex-col lg:flex-row items-center gap-10">
 
       {/* Image */}
-      <div className="w-full lg:w-1/2 flex justify-center">
+      <div className="w-full lg:w-1/2 flex justify-center ">
         <img
           src={disclaimerData?.cms_image_url}
           alt="Legal Disclaimer"

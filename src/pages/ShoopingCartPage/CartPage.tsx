@@ -1,56 +1,18 @@
-import { useState } from "react";
-import type { CartItemType } from "../../types.cart";
 import CartItem from "../../components/CartComponent/CartItem";
 import OrderSummary from "../../components/CartComponent/OrderSummary";
-import peptide from "../../assets/images/peptide.png";
 import LegalDisclaimer from "../../components/HomeComponents/LegalDisclaimer";
 import { Link } from "react-router-dom";
+import { useCart } from "../../context/CartContext";
 
 export default function CartPage() {
-  const [items, setItems] = useState<CartItemType[]>([
-    {
-      id: "1",
-      title: "Peptides Crafted",
-      subtitle: "BPC-157 20mg",
-      price: 20,
-      quantity: 3,
-      image: peptide,
-    },
-    {
-      id: "2",
-      title: "Peptides Crafted",
-      subtitle: "BPC-157 20mg",
-      price: 20,
-      quantity: 3,
-      image: peptide,
-    },
-    {
-      id: "3",
-      title: "Peptides Crafted",
-      subtitle: "BPC-157 20mg",
-      price: 20,
-      quantity: 3,
-      image: peptide,
-    },
+  const {
+    cart,
+    removeFromCart,
+    increaseQty,
+    decreaseQty,
+  } = useCart();
 
-  ]);
-
-  const increase = (id: string) =>
-    setItems((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, quantity: i.quantity + 1 } : i))
-    );
-
-  const decrease = (id: string) =>
-    setItems((prev) =>
-      prev.map((i) =>
-        i.id === id && i.quantity > 1 ? { ...i, quantity: i.quantity - 1 } : i
-      )
-    );
-
-  const remove = (id: string) =>
-    setItems((prev) => prev.filter((i) => i.id !== id));
-
-  const subtotal = items.reduce(
+  const subtotal = cart.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
   );
@@ -60,31 +22,52 @@ export default function CartPage() {
       <div className="section-padding-x section-padding-y">
         <h1 className="text-xl font-semibold mb-6">
           Shopping Cart{" "}
-          <span className="text-[#0E9FBA]">({items.length} Items)</span>
+          <span className="text-[#0E9FBA]">
+            ({cart.length} Items)
+          </span>
         </h1>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
-          {/* Left: Cart Items */}
-          <div className="col-span-2">
-            {items.map((item) => (
-              <CartItem
-                key={item.id}
-                item={item}
-                onIncrease={increase}
-                onDecrease={decrease}
-                onRemove={remove}
-              />
-            ))}
-
-            <Link to="/catalogue" className="mt-6 text-[#0E9FBA] text-sm flex items-center gap-2">
-              ← Continue Shopping
+        {cart.length === 0 ? (
+          <div className="text-center py-16">
+            <p className="text-gray-500 mb-4">Your cart is empty</p>
+            <Link
+              to="/catalogue"
+              className="text-[#0E9FBA] underline"
+            >
+              Continue Shopping
             </Link>
           </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+            {/* Left: Cart Items */}
+            <div className="col-span-2 space-y-6">
+              {cart.map((item) => (
+                <CartItem
+                  key={item.id}
+                  item={item}
+                  onIncrease={() => increaseQty(item.id)}
+                  onDecrease={() => decreaseQty(item.id)}
+                  onRemove={() => removeFromCart(item.id)}
+                />
+              ))}
 
-          {/* Right: Order Summary */}
-          <OrderSummary subtotal={subtotal} shipping={8} />
-        </div>
+              <Link
+                to="/catalogue"
+                className="text-[#0E9FBA] text-sm flex items-center gap-2"
+              >
+                ← Continue Shopping
+              </Link>
+            </div>
+
+            {/* Right: Order Summary */}
+            <div className="col-span-2 sm:col-span-1">
+            <OrderSummary subtotal={subtotal} shipping={0} />
+
+            </div>
+          </div>
+        )}
       </div>
+
       <LegalDisclaimer />
     </section>
   );

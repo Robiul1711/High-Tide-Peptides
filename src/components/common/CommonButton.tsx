@@ -34,7 +34,7 @@ const CommonButton = React.forwardRef<
   CommonButtonProps
 >(({ children, className = "", as = "button", ...rest }, ref) => {
   const baseClasses = `
-    px-6 py-3 rounded-lg font-medium transition-all 
+   px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base  rounded-lg font-medium transition-all 
     bg-Primary text-white hover:bg-opacity-90
     ${className}
   `;

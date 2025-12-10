@@ -39,7 +39,7 @@ const Catalogue = () => {
       <div className="flex justify-end px-4 md:hidden">
         <button
           onClick={() => setIsOpen(true)}
-          className="px-6 py-2 bg-Primary text-white mb-5 rounded-md font-medium shadow-md hover:opacity-90 transition"
+          className="px-4 sm:px-6 py-1 sm:py-2 bg-Primary text-white mb-5 rounded-md font-medium shadow-md hover:opacity-90 transition"
         >
           Filter
         </button>

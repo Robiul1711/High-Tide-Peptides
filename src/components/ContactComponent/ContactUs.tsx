@@ -44,8 +44,8 @@ export default function ContactUs() {
       </Title>
 
       <p className="text-sm sm:text-base lg:text-lg text-center text-gray-500 mb-10 max-w-2xl mx-auto">
-        Lorem ipsum dolor sit amet consectetur. Nunc ipsum tincidunt dictum
-        donec dui in cursus risus.
+    Have a question or need support? We’re here to help.
+  Feel free to reach out to us anytime, and our team will get back to you as soon as possible.
       </p>
 
       {/* FORM */}
