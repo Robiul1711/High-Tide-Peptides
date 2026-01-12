@@ -25,4 +25,8 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+   server: {
+    port: 5174,      // 👈 force localhost:5174
+    strictPort: true // 👈 fail if port is busy (recommended)
+  }
 });

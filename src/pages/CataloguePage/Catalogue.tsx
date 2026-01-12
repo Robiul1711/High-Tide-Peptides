@@ -1,7 +1,8 @@
-import  { useState } from "react";
+import { useState } from "react";
 import FilterArea from "../../components/CatalogueComponent/FilterArea";
 import MedicineCard from "../../components/common/MedicineCard";
 import LegalDisclaimer from "../../components/HomeComponents/LegalDisclaimer";
+import { Helmet } from "react-helmet-async";
 
 const Catalogue = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ const Catalogue = () => {
   const handleFilterChange = (newParams: any) => {
     setFilterParams(newParams);
     setApplyFilters(true);
-    
+
     // Close mobile drawer if open
     if (isOpen) {
       setIsOpen(false);
@@ -35,6 +36,25 @@ const Catalogue = () => {
 
   return (
     <section className="section-padding-y relative">
+      {/* =================== SEO =================== */}
+      <Helmet>
+        <title>Peptide Catalog | Premium Research Peptides</title>
+        <meta
+          name="description"
+          content="Browse our premium research peptide catalog. High-purity, GMP-produced peptides with no fillers or buffers. Explore top-quality products for scientific and research use."
+        />
+
+        <meta
+          property="og:title"
+          content="Peptide Catalog | Premium Research Peptides"
+        />
+        <meta
+          property="og:description"
+          content="Explore a wide selection of high-quality research peptides crafted under GMP standards. Pure, consistent, and trusted for scientific applications."
+        />
+        <meta property="og:type" content="website" />
+      </Helmet>
+      {/* ================================================== */}
       {/* ===== Filter Button (Mobile + Desktop) ===== */}
       <div className="flex justify-end px-4 md:hidden">
         <button
@@ -46,10 +66,10 @@ const Catalogue = () => {
       </div>
 
       {/* ===== Main Layout ===== */}
-      <div className="section-padding-x flex w-full gap-6 lg:gap-10 ">
+      <div className="section-padding-x flex w-full gap-6  ">
         {/* Sidebar (Desktop View) */}
-        <div className="hidden md:block md:w-[20%]">
-          <FilterArea 
+        <div className="hidden md:block md:w-[20%] sticky top-28 h-fit">
+          <FilterArea
             onFilterChange={handleFilterChange}
             onClearFilters={handleClearFilters}
           />
@@ -57,7 +77,7 @@ const Catalogue = () => {
 
         {/* Products Area */}
         <div className="w-full md:w-[80%]">
-          <MedicineCard 
+          <MedicineCard
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
             filterParams={filterParams}
             applyFilters={applyFilters}
@@ -87,7 +107,7 @@ const Catalogue = () => {
                 ✕
               </button>
             </div>
-            <FilterArea 
+            <FilterArea
               onFilterChange={handleFilterChange}
               onClearFilters={handleClearFilters}
             />

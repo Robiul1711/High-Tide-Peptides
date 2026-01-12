@@ -13,9 +13,9 @@ interface ResearchProps {
   };
 }
 const Research = ({heroData} : ResearchProps) => {
-  console.log(heroData)
+  // console.log(heroData)
   return (
-   <div className="section-padding-x">
+   <div className="section-padding-x mt-10">
   <div className="font-playfair text-center flex flex-col gap-4">
     <Title level="title48">{heroData?.title}</Title>
 

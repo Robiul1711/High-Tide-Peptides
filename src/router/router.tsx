@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     element: <Layout />, // Public layout
     children: [
       { path: "/", element: <Home /> },
-      { path: "/catalogue", element: <Catalogue /> },
+      { path: "/catalog", element: <Catalogue /> },
       { path: "/contact", element: <Contact /> },
       { path: "/cart", element: <CartPage /> },
       { path: "/product/:id", element: <ProductDetails /> },

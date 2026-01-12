@@ -2,16 +2,16 @@ import { Link } from "react-router-dom";
 
 interface Props {
   subtotal: number;
-  shipping: number;
 }
 
-export default function OrderSummary({ subtotal, shipping }: Props) {
+export default function OrderSummary({ subtotal }: Props) {
+  const shipping = 10; // ✅ fixed $10 shipping
   const total = subtotal + shipping;
 
   return (
-    <div className="bg-[#F5FBFC] rounded-xl p-6 shadow-sm w-full ">
+    <div className="bg-[#F5FBFC] rounded-xl p-6 shadow-sm w-full">
       <h3 className="text-lg font-semibold text-center mb-4">
-        Order Summery
+        Order Summary
       </h3>
 
       <div className="space-y-3 text-sm">
@@ -22,7 +22,7 @@ export default function OrderSummary({ subtotal, shipping }: Props) {
 
         <div className="flex justify-between">
           <p>Shipping</p>
-          <p className="font-semibold">${shipping.toFixed(2)}</p>
+          <p className="font-semibold">$10.00</p>
         </div>
 
         <hr />
@@ -33,7 +33,10 @@ export default function OrderSummary({ subtotal, shipping }: Props) {
         </div>
       </div>
 
-      <Link to="/checkout" className="mt-5 w-full bg-[#0E9FBA] text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2">
+      <Link
+        to="/checkout"
+        className="mt-5 w-full bg-[#0E9FBA] text-white py-3 rounded-lg font-medium flex items-center justify-center gap-2"
+      >
         Proceed To Checkout →
       </Link>
 

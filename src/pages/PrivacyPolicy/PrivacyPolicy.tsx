@@ -1,3 +1,4 @@
+import PageLoader from "../../components/common/PageLoader";
 import useClient from "../../hooks/useClient";
 
 const PrivacyPolicy = () => {
@@ -15,7 +16,7 @@ const PrivacyPolicy = () => {
   if (isLoading) {
     return (
       <div className="section-padding-x section-padding-y text-center text-gray-500">
-        Loading privacy policy...
+           <PageLoader/>
       </div>
     );
   }
