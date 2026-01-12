@@ -17,6 +17,36 @@ export default function CartPage() {
     0
   );
 
+
+  /* ----------------------------------------
+      GA4: REMOVE FROM CART HANDLER
+  -----------------------------------------*/
+  const handleRemoveItem = (item: any) => {
+    // 1. Push GA4 Event
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ ecommerce: null });
+    window.dataLayer.push({
+      event: "remove_from_cart",
+      ecommerce: {
+        currency: "USD",
+        value: item.price * item.quantity, // Value of items being removed
+        items: [
+          {
+            item_id: String(item.id),
+            item_name: item.title,
+            price: item.price,
+            quantity: item.quantity, // Quantity being removed
+            item_category: "Medicine",
+            google_business_vertical: "retail",
+          },
+        ],
+      },
+    });
+
+    // 2. Perform actual removal
+    removeFromCart(item.id);
+  };
+
   return (
     <section>
       <div className="section-padding-x section-padding-y">
@@ -30,10 +60,7 @@ export default function CartPage() {
         {cart.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-500 mb-4">Your cart is empty</p>
-            <Link
-              to="/catalogue"
-              className="text-[#0E9FBA] underline"
-            >
+            <Link to="/catalog" className="text-[#0E9FBA] underline">
               Continue Shopping
             </Link>
           </div>
@@ -47,12 +74,13 @@ export default function CartPage() {
                   item={item}
                   onIncrease={() => increaseQty(item.id)}
                   onDecrease={() => decreaseQty(item.id)}
-                  onRemove={() => removeFromCart(item.id)}
+                  // ✅ Use the new handler here
+                  onRemove={() => handleRemoveItem(item)}
                 />
               ))}
 
               <Link
-                to="/catalogue"
+                to="/catalog"
                 className="text-[#0E9FBA] text-sm flex items-center gap-2"
               >
                 ← Continue Shopping
@@ -61,8 +89,7 @@ export default function CartPage() {
 
             {/* Right: Order Summary */}
             <div className="col-span-2 sm:col-span-1">
-            <OrderSummary subtotal={subtotal} shipping={0} />
-
+              <OrderSummary subtotal={subtotal}  />
             </div>
           </div>
         )}

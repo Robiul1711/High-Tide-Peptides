@@ -93,7 +93,7 @@ export default function CartItem({
         </div>
 
         {/* Price */}
-        <p className="w-24 text-center font-semibold text-[#0E9FBA]">
+        <p className="w-24 text-center font-semibold ">
           ${item.price.toFixed(2)}
         </p>
 
@@ -117,7 +117,7 @@ export default function CartItem({
         </div>
 
         {/* Total */}
-        <p className="w-24 text-center font-semibold text-[#0E9FBA]">
+        <p className="w-24 text-center font-semibold ">
           ${(item.price * item.quantity).toFixed(2)}
         </p>
 

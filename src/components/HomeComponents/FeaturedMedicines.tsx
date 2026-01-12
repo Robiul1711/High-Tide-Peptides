@@ -16,12 +16,12 @@ const FeaturedMedicines = () => {
             level="title18"
             className="text-Secondary font-poppins max-w-3xl mx-auto"
           >
-            Explore our top-selected medicines, chosen for quality, safety, and
-            trusted results. Find reliable solutions for your health needs with
+            Explore our top-selected peptides, chosen for quality, safety, and
+            trusted results. Find reliable solutions for your research needs with
             confidence.
           </Title>
         </div>
-        <CommonButton as="link" to="/catalogue" className=" bg-Primary text-white font-poppins flex items-center gap-2">
+        <CommonButton as="link" to="/catalog" className=" bg-Primary text-white font-poppins flex items-center gap-2">
           View all <FaArrowRightLong />
         </CommonButton>
       </div>

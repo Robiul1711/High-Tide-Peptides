@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import banner from "../../assets/images/banner1.png";
+import banner from "../../assets/images/banner.png";
 import CommonButton from "../common/CommonButton";
 import Title from "../common/Title";
 
@@ -86,7 +86,7 @@ const Banner = ({ bannerData, titleData }: BannerProps) => {
 
 <div >
   <CommonButton
-    to="/catalogue"
+    to="/catalog"
     as="link"
     className="mx-auto mt-6 bg-Primary inline-flex items-center gap-2 text-white font-poppins"
   >
